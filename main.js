@@ -14,12 +14,18 @@ const gameLoop = () => {
         game.moveSnake()
         cli.drawField()
 
-        if (game.checkCollision()) {
-            game.vars.running = false
+        const hasWon = game.checkWin()
+        const hasCollision = game.checkCollision()
+
+        if (hasWon) {
+            console.log(`\nВы выиграли! Ваш счет: ${game.vars.count}\nНажмите R чтобы начать заново, Q чтобы выйти:`)
+        } else if (hasCollision) {
             console.log(`\nВы проиграли! Ваш счет: ${game.vars.count}\nНажмите R чтобы начать заново, Q чтобы выйти:`)
         } else {
             console.log(`\nТекущий счет: ${game.vars.count}\nДлина змеи: ${game.snake.parts.length}`)
         }
+
+        if (hasWon || hasCollision) {game.vars.running = false}
     }
 
     const onkeypress = (_, key) => {
@@ -44,4 +50,5 @@ const gameLoop = () => {
 }
 
 game.initGame()
+cli.drawField()
 gameLoop()
