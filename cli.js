@@ -14,20 +14,14 @@ export const drawField = () => {
             let symbol = ' '
 
             if (x % 2 === 0) {
-                if (food.x === Math.round(x / 2) && food.y === y) {
-                    symbol = '*'
-                } else {
-                    for (let [i, part] of snake.parts.entries()) {
-                        if (part.x === Math.round(x / 2) && part.y === y) {
-                            const isHead = i === snake.parts.length - 1
-                            symbol = isHead ? '@' : 'o'
-                        }
+                const isFood = food.x === Math.round(x / 2) && food.y === y
+                symbol = isFood ? '*' : symbol
+                
+                for (let [i, part] of snake.parts.entries()) {
+                    if (part.x === Math.round(x / 2) && part.y === y) {
+                        const isHead = i === snake.parts.length - 1
+                        symbol = isHead ? '@' : 'o'
                     }
-                    // const part = field.snake.parts.filter((p) => {
-                    //     return p.x === Math.round(x / 2) && p.y === y
-                    // })
-                    
-                    // output += part ? part : ' '
                 }
             }
             output += symbol 
