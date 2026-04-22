@@ -36,11 +36,8 @@ const gameLoop = () => {
             game.initGame()
         }
         
-        const keys = ['left', 'up', 'right', 'down']
-        if (keys.includes(key.name)) {
-            if (keys.indexOf(key.name) % 2 !== keys.indexOf(game.snake.direction) % 2) {
-                game.snake.direction = key.name
-            }
+        if (game.isValidDirection(key.name)) {
+            game.snake.direction = key.name
         }
         if (game.vars.running) {process.stdin.removeAllListeners('keypress')}
     }

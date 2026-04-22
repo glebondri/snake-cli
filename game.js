@@ -33,6 +33,10 @@ export const moveSnake = () => {
     } else {snake.parts.shift()}
 }
 
+export const isValidDirection = (key) => {
+    const keys = ['left', 'up', 'right', 'down']
+    return keys.includes(key) && keys.indexOf(key) % 2 !== keys.indexOf(snake.direction) % 2
+}
 
 export const checkWin = () => {
     return snake.parts.length === fieldSize ** 2
